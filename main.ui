@@ -30,7 +30,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Employee Attendance System</string>
+   <string>Employee Attendance Application</string>
   </property>
   <property name="windowIcon">
    <iconset>

@@ -14,6 +14,7 @@ class UIDialog(QDialog):
         super(UIDialog, self).__init__()
         loadUi("./main.ui", self)
 
+        # generate time
         now = QDate.currentDate()
         current_date = now.toString('ddd dd MMMM yyyy')
         current_time = datetime.datetime.now().strftime('%I:%M %p')
@@ -27,7 +28,8 @@ class UIDialog(QDialog):
             self.capture = cv2.VideoCapture(int(camera_name))
         else:
         	self.capture = cv2.VideoCapture(camera_name)
-        self.timer = QTimer(self)  # Create Timer
+        # generate timer
+        self.timer = QTimer(self) 
         path = 'Images'
         images = []
         self.person_names = []
@@ -60,7 +62,7 @@ class UIDialog(QDialog):
                 self.clock_in_btn.setEnabled(False)
                 with open('Attendance.csv', 'a') as f:
                     if name != 'unknown':
-                        btn_reply = QMessageBox.question(self, 'Welcome ' + name, 'Are you Clocking in?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                        btn_reply = QMessageBox.question(self, 'Welcome ' + name, 'Are you clocking in?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
                         if btn_reply == QMessageBox.Yes:
                             date_time_string = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
                             f.writelines(f'\n{name},{date_time_string},Clock In')
@@ -78,7 +80,7 @@ class UIDialog(QDialog):
                 self.clock_out_btn.setEnabled(False)
                 with open('Attendance.csv', 'a') as f:
                     if name != 'unknown':
-                        btn_reply = QMessageBox.question(self, 'Cheers ' + name, 'Are you Clocking out?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+                        btn_reply = QMessageBox.question(self, 'Hello ' + name, 'Are you clocking out?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
                         if btn_reply == QMessageBox.Yes:
                             date_time_string = datetime.datetime.now().strftime("%y/%m/%d %H:%M:%S")
                             f.writelines(f'\n{name},{date_time_string},Clock Out')
@@ -118,7 +120,7 @@ class UIDialog(QDialog):
             # getting the name of the best match face
             if matches[match_idx]:
                 name = person_names[match_idx].upper()
-                print(name)
+                # print(name)
 
                 # getting face coordinates
                 y1, x2, y2, x1 = face_loc
@@ -126,8 +128,6 @@ class UIDialog(QDialog):
 
                 # creating a rectangle to mark the face
                 cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
-                # cv2.rectangle(img, (x1, y2-35), (x2, y2), (0, 255, 0), cv2.FILLED)
-                # cv2.putText(img, name, (x1+6, y2-6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 1)
                 mark_attendance(name)
         
         return frame
@@ -136,7 +136,7 @@ class UIDialog(QDialog):
         ret, self.image = self.capture.read()
         self.displayImage(self.image, self.known_encoded_imgs, self.person_names, 1)
 
-    # displaying image of camera to pyQt
+    # displaying image of camera to pyQt GUI
     def displayImage(self, image, encode_list, class_names, window=1):
         image = self.face_recog(image, encode_list, class_names)
         qformat = QImage.Format_Indexed8

@@ -1,13 +1,6 @@
 Must use following python version:
 - python 3.7
 
-Execute the following command to install all required packages:
-```
-pip install -r requirements.txt
-```
-
-You can also install all required packages manually
-
 Must install following packages:
 - cmake version 3.22.1
 ```

@@ -1,7 +1,7 @@
 Must use following python version:
 - python 3.7
 
-If you can't install dlib, you must install C++ Buildtools from visual studio. You can install visual studio build tools from following link: https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15#
+If you can't install dlib, you must install C++ Buildtools from visual studio. You can install visual studio build tools [here](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=15#)
 
 Must install following packages:
 - cmake version 3.22.1
